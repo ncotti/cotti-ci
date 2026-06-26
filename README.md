@@ -1,0 +1,2 @@
+# cottiCI
+Reusable CI scripts
