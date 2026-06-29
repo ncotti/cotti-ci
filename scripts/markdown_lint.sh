@@ -28,10 +28,8 @@ ${BOLD_MAGENTA}Usage:${NC}
     ${0} <target_dir> [config_file]
 
 Where:
-* ${BOLD}${UNDERLINE}<target_dir>${NC}: Root directory from where all markdown files
-  will be evaluated.
-* ${BOLD}${UNDERLINE}[config_file]${NC}: .markdownlint-cli2.jsonc configuration file,
-  relative to the <target_dir>. If not provided, a default one will be used.
+* ${BOLD}${UNDERLINE}<target_dir>${NC}: Root directory from where all markdown files will be evaluated.
+* ${BOLD}${UNDERLINE}[config_file]${NC}: .markdownlint-cli2.jsonc configuration file, relative to the <target_dir>. If not provided, a default one will be used.
 EOF
 )
 
@@ -52,7 +50,7 @@ config_file="$2"
 
 if [ -z "${target_dir}" ]; then
     error "${MSG_NO_TARGET_DIR}"
-    printf "${MSG_USAGE}"
+    printf "${MSG_USAGE}\n"
     exit 1
 fi
 

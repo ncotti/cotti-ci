@@ -22,8 +22,7 @@ ${BOLD_MAGENTA}Usage:${NC}
     ${0} <target_dir>
 
 Where:
-* ${BOLD}${UNDERLINE}<target_dir>${NC}: Root directory from where all markdown files
-  will be evaluated.
+* ${BOLD}${UNDERLINE}<target_dir>${NC}: Root directory from where all ".sh" files will be evaluated.
 EOF
 )
 
@@ -38,7 +37,7 @@ target_dir="$1"
 
 if [ -z "${target_dir}" ]; then
     error "${MSG_NO_TARGET_DIR}"
-    printf "${MSG_USAGE}"
+    printf "${MSG_USAGE}\n"
     exit 1
 fi
 
