@@ -7,7 +7,7 @@
 setup_file() {
     true
     export SCRIPT="$BATS_TEST_DIRNAME/../scripts/markdown_lint.sh"
-    export MARKDOWN_DIR="$BATS_TEST_DIRNAME/markdown_repo"
+    export EXAMPLE_REPO_DIR="$BATS_TEST_DIRNAME/example_repo"
     export CONFIG_FILE="$BATS_TEST_DIRNAME/../scripts/defaults/.markdownlint-cli2.jsonc"
 }
 
@@ -36,10 +36,11 @@ teardown_file() {
     run "${SCRIPT}" "random_dir"
     assert_failure
     assert_output --partial "[ERROR]"
+    assert_output --partial "random_dir"
 }
 
 @test "Formatting should be applied to all .md files inside the folder recursively" {
-    run "${SCRIPT}" "${MARKDOWN_DIR}"
+    run "${SCRIPT}" "${EXAMPLE_REPO_DIR}"
     assert_success
     # Message stating default configuration
     assert_output --partial "[INFO]"
@@ -51,14 +52,14 @@ teardown_file() {
 }
 
 @test "If a custom config_file is provided and it does not exists, fail" {
-    run "${SCRIPT}" "${MARKDOWN_DIR}" "xd_file"
+    run "${SCRIPT}" "${EXAMPLE_REPO_DIR}" "xd_file"
     assert_failure
     assert_output --partial "[ERROR]"
     assert_output --partial "xd_file"
 }
 
 @test "If a custom config_file is provided and it does exists, use it" {
-    run "${SCRIPT}" "${MARKDOWN_DIR}" "${CONFIG_FILE}"
+    run "${SCRIPT}" "${EXAMPLE_REPO_DIR}" "${CONFIG_FILE}"
     assert_success
     refute_output --partial "default"
 }
