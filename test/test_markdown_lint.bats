@@ -8,7 +8,7 @@ setup_file() {
     true
     export SCRIPT="$BATS_TEST_DIRNAME/../scripts/markdown_lint.sh"
     export EXAMPLE_REPO_DIR="$BATS_TEST_DIRNAME/example_repo"
-    export CONFIG_FILE="$BATS_TEST_DIRNAME/../scripts/defaults/.markdownlint-cli2.jsonc"
+    export CONFIG_FILE="$BATS_TEST_DIRNAME/../default_config/.markdownlint-cli2.jsonc"
 }
 
 setup() {

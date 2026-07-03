@@ -1,0 +1,52 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
+# Copyright (C) 2026  Nicolas Gabriel Cotti
+
+name: License checker
+description: >
+  Makes sure that all relevant files have the license correctly setup
+
+env:
+  THIS_REPO: "cotti-ci"
+
+inputs:
+  target_dir:
+    description: "Root directory to parse files"
+    required: true
+    type: string
+  license:
+    description: >
+      The string 'SPDX-License-Identifier: <license>'
+      will be searched on files' header.
+    default: "GPL-3.0-or-later"
+    required: false
+    type: string
+  copyright:
+    description: >
+      Copyright notice.
+      An exact match will be searched on the files' header
+    required: true
+    type: string
+  file_extensions:
+    description: >
+      A license and copyright will be searched on files ending with
+      these white-space separated extensions"
+    required: true
+    type: string
+
+runs:
+  using: "composite"
+  steps:
+    - name: "Checkout this repo"
+      uses: actions/checkout@v5
+      with:
+        repository: ncotti/${THIS_REPO}
+        path: ${THIS_REPO}
+
+    - name: "License checker script"
+      run: |
+        chmod +x ${THIS_REPO}/scripts/license_check.sh
+        ${THIS_REPO}/scripts/license_check.sh \
+          ${{ inputs.target_dir }} \
+          ${{ inputs.license }} \
+          ${{ inputs.copyright }} \
+          ${{ inputs.file_extensions }}

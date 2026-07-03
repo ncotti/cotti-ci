@@ -1,0 +1,49 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
+# Copyright (C) 2026  Nicolas Gabriel Cotti
+
+## Calls all example workflows present in this repository with
+## "test/example_repo" as the target directory.
+
+name: "Examples"
+on: push
+
+env:
+  CI_ACTION_PATH: ncotti/cotti-ci/actions
+  CI_VERSION: v1
+
+jobs:
+  example_markdown_linter:
+    runs-on: ubuntu-latest
+    env:
+      REPO: project_repo
+    steps:
+      - name: "Checkout project repo"
+        uses: actions/checkout@v5
+        with:
+          path: ${REPO_PATH}
+
+      - name: "Call Markdown linter"
+        uses: ${CI_ACTION_PATH}/markdown_linter.yml@${CI_VERSION}
+        with:
+          target_dir: ${REPO_PATH}
+
+  example_license_check:
+    runs-on: ubuntu-latest
+    env:
+      REPO: project_repo
+      LICENSE: "GPL-3.0-or-later"
+      COPYRIGHT: "Copyright (C) 2026  Nicolas Gabriel Cotti"
+      EXTENSIONS: .c .h .yml .sh .bats
+    steps:
+      - name: "Checkout project repo"
+        uses: actions/checkout@v5
+        with:
+          path: ${REPO_PATH}
+
+      - name: "Call license checker"
+        uses: ${CI_ACTION_PATH}/licence_checker.yml@${CI_VERSION}
+        with:
+          target_dir: ${REPO}
+          license: ${LICENSE}
+          COPYRIGHT: ${COPYRIGHT}
+          EXTENSION: ${EXTENSIONS}

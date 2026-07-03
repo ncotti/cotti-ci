@@ -17,7 +17,7 @@ source "${SCRIPT_DIR}/common.sh"
 ###############################################################################
 # Constants
 ###############################################################################
-DEFAULT_CONFIG_FILE="${SCRIPT_DIR}/defaults/.markdownlint-cli2.jsonc"
+DEFAULT_CONFIG_FILE="${SCRIPT_DIR}/../default_config/.markdownlint-cli2.jsonc"
 
 MSG_NO_TARGET_DIR="No target directory argument."
 

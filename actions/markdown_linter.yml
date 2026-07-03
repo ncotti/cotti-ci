@@ -1,0 +1,33 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
+# Copyright (C) 2026  Nicolas Gabriel Cotti
+
+name: Markdown Linter
+description: Enforces Markdown linter.
+
+env:
+  THIS_REPO: "cotti-ci"
+
+inputs:
+  target_dir:
+    description: "Root directory to parse files"
+    required: true
+    type: string
+  config_file:
+    description: ".markdownlint-cli2.jsonc file path inside your repo"
+    default: "${THIS_REPO}/default_config/.markdownlint-cli2.jsonc"
+    required: false
+    type: string
+
+runs:
+  using: "composite"
+  steps:
+    - name: "Checkout this repo"
+      uses: actions/checkout@v5
+      with:
+        repository: ncotti/${THIS_REPO}
+        path: ${THIS_REPO}
+
+    - name: "Markdown linter script"
+      run: |
+        chmod +x ${THIS_REPO}/scripts/markdown_lint.sh
+        ${THIS_REPO}/scripts/markdown_lint.sh ${{ inputs.target_dir}} ${{ inputs.config_file }}
