@@ -7,10 +7,6 @@
 name: "Examples"
 on: push
 
-env:
-  CI_ACTION_PATH: ncotti/cotti-ci/actions
-  CI_VERSION: v1
-
 jobs:
   example_markdown_linter:
     runs-on: ubuntu-latest
@@ -20,12 +16,12 @@ jobs:
       - name: "Checkout project repo"
         uses: actions/checkout@v5
         with:
-          path: ${REPO_PATH}
+          path: ${{ env.REPO_PATH }}
 
       - name: "Call Markdown linter"
-        uses: ${CI_ACTION_PATH}/markdown_linter.yml@${CI_VERSION}
+        uses: ncotti/cotti-ci/actions/markdown_linter.yml@v1
         with:
-          target_dir: ${REPO_PATH}
+          target_dir: ${{ env.REPO_PATH }}
 
   example_license_check:
     runs-on: ubuntu-latest
@@ -38,12 +34,12 @@ jobs:
       - name: "Checkout project repo"
         uses: actions/checkout@v5
         with:
-          path: ${REPO_PATH}
+          path: ${{ env.REPO_PATH }}
 
       - name: "Call license checker"
-        uses: ${CI_ACTION_PATH}/licence_checker.yml@${CI_VERSION}
+        uses: ncotti/cotti-ci/actions/licence_checker.yml@v1
         with:
-          target_dir: ${REPO}
-          license: ${LICENSE}
-          COPYRIGHT: ${COPYRIGHT}
-          EXTENSION: ${EXTENSIONS}
+          target_dir: ${{ env.REPO }}
+          license: ${{ env.LICENSE }}
+          COPYRIGHT: ${{ env.COPYRIGHT }}
+          EXTENSION: ${{ env.EXTENSIONS }}
