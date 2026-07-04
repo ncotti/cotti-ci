@@ -89,5 +89,5 @@ info "Found BATS executable at: %s" "${BATS}"
 # Script
 ###############################################################################
 info "${MSG_RUNNING}"
-"${BATS}" --pretty "${target_dir}"
+"${BATS}" "${target_dir}"
 ok "${MSG_OK}"
