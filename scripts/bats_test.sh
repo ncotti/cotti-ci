@@ -68,6 +68,7 @@ if ! which bats; then
         cd "${target_dir}" && git submodule update --init ${bats_submodules}
 
         for submodule in ${bats_submodules}; do
+            printf "%s\n" "${target_dir}/${submodule}/bin/bats"
             if [ -x "${target_dir}/${submodule}/bin/bats" ]; then
                 BATS="${target_dir}/${submodule}/bin/bats"
                 break
