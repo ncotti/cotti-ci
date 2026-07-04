@@ -4,9 +4,6 @@
 name: Markdown Linter
 description: Enforces Markdown linter.
 
-env:
-  THIS_REPO: "cotti-ci"
-
 inputs:
   target_dir:
     description: "Root directory to parse files"
@@ -14,7 +11,7 @@ inputs:
     type: string
   config_file:
     description: ".markdownlint-cli2.jsonc file path inside your repo"
-    default: "${THIS_REPO}/default_config/.markdownlint-cli2.jsonc"
+    default: "cotti-ci/default_config/.markdownlint-cli2.jsonc"
     required: false
     type: string
 
@@ -24,10 +21,11 @@ runs:
     - name: "Checkout this repo"
       uses: actions/checkout@v5
       with:
-        repository: ncotti/${THIS_REPO}
-        path: ${THIS_REPO}
+        repository: ncotti/cotti-ci
+        path: cotti-ci
 
     - name: "Markdown linter script"
+      shell: bash
       run: |
-        chmod +x ${THIS_REPO}/scripts/markdown_lint.sh
-        ${THIS_REPO}/scripts/markdown_lint.sh ${{ inputs.target_dir}} ${{ inputs.config_file }}
+        chmod +x cotti-ci/scripts/markdown_lint.sh
+        cotti-ci/scripts/markdown_lint.sh ${{ inputs.target_dir}} ${{ inputs.config_file }}

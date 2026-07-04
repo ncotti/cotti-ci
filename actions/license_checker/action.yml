@@ -5,9 +5,6 @@ name: License checker
 description: >
   Makes sure that all relevant files have the license correctly setup
 
-env:
-  THIS_REPO: "cotti-ci"
-
 inputs:
   target_dir:
     description: "Root directory to parse files"
@@ -39,13 +36,14 @@ runs:
     - name: "Checkout this repo"
       uses: actions/checkout@v5
       with:
-        repository: ncotti/${THIS_REPO}
-        path: ${THIS_REPO}
+        repository: ncotti/cotti-ci
+        path: cotti-ci
 
     - name: "License checker script"
+      shell: bash
       run: |
-        chmod +x ${THIS_REPO}/scripts/license_check.sh
-        ${THIS_REPO}/scripts/license_check.sh \
+        chmod +x cotti-ci/scripts/license_check.sh
+        cotti-ci/scripts/license_check.sh \
           ${{ inputs.target_dir }} \
           ${{ inputs.license }} \
           ${{ inputs.copyright }} \
