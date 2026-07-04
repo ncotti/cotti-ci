@@ -1,10 +1,11 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 # Copyright (C) 2026  Nicolas Gabriel Cotti
 
-## Calls all example workflows present in this repository with
-## "test/example_repo" as the target directory.
+
 
 name: "Examples"
+description: <
+  Calls all example workflows present in this repository.
 on: push
 
 jobs:
