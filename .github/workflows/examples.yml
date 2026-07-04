@@ -68,3 +68,23 @@ jobs:
         uses: ./actions/bash_linter
         with:
           target_dir: "${{ env.REPO_PATH }}"
+
+  example_bats_test:
+    runs-on: ubuntu-latest
+    env:
+      # Modify to match your repo requirements
+      REPO_PATH: .
+      TEST_PATH: test
+    steps:
+      - name: "Checkout project repo"
+        uses: actions/checkout@v5
+        with:
+          path: ${{ env.REPO_PATH }}
+
+      - name: "Call bash linter"
+        # For usage in another repo:
+        # ncotti/cotti-ci/actions/bats_tester@vX
+        uses: ./actions/bats_tester
+        with:
+          target_dir: "${{ env.REPO_PATH }}/${{ env.TEST_PATH }}"
+
