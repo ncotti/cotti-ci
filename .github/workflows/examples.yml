@@ -21,7 +21,7 @@ jobs:
       - name: "Call Markdown linter"
         # For usage in another repo:
         # ncotti/cotti-ci/actions/markdown_linter@vX
-        uses: ./actions/markdown_linter
+        uses: ${{ env.REPO_PATH }}/actions/markdown_linter
         with:
           target_dir: ${{ env.REPO_PATH }}
 
@@ -40,8 +40,8 @@ jobs:
 
       - name: "Call license checker"
         # For usage in another repo:
-        # ncotti/cotti-ci/actions/licence_checker@vX
-        uses: ./actions/licence_checker
+        # ncotti/cotti-ci/actions/license_checker@vX
+        uses: ${{ env.REPO_PATH }}/actions/license_checker
         with:
           target_dir: ${{ env.REPO_PATH }}
           license: ${{ env.LICENSE }}
