@@ -69,6 +69,8 @@ if ! which bats; then
 
         for submodule in ${bats_submodules}; do
             printf "%s\n" "${target_dir}/${submodule}/bin/bats"
+            ls "${target_dir}/${submodule}"
+            ls "${target_dir}/${submodule}/bin"
             if [ -x "${target_dir}/${submodule}/bin/bats" ]; then
                 BATS="${target_dir}/${submodule}/bin/bats"
                 break
