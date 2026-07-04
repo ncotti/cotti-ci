@@ -1,0 +1,29 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
+# Copyright (C) 2026  Nicolas Gabriel Cotti
+
+name: Bash linter
+description: >
+  Uses shellcheck to check that bash scripts are ok.
+  Extensions checked: .sh, .bash, .bats
+
+inputs:
+  target_dir:
+    description: "Root directory to parse files"
+    required: true
+    type: string
+
+runs:
+  using: "composite"
+  steps:
+    - name: "Checkout cotti-ci"
+      uses: actions/checkout@v5
+      with:
+        repository: ncotti/cotti-ci
+        path: cotti-ci
+
+    - name: "Run shellcheck"
+      shell: bash
+      run: |
+        chmod +x cotti-ci/scripts/bash_lint.sh
+        cotti-ci/scripts/bash_lint.sh \
+          "${{ inputs.target_dir }}"

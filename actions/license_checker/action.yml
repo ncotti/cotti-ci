@@ -33,7 +33,7 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: "Checkout this repo"
+    - name: "Checkout cotti-ci"
       uses: actions/checkout@v5
       with:
         repository: ncotti/cotti-ci
