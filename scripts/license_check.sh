@@ -36,6 +36,7 @@ MSG_NO_FILE_EXTENSIONS="At least one file extension must be provided."
 MSG_NO_FILES_CHECKED="No files matched the provided file extensions."
 MSG_CHECKED_FILES="Total files checked: %d"
 MSG_FAILING_FILES="Failing files:"
+MSG_OK_FILES="Compliant files:"
 
 ###############################################################################
 # Arguments and argument validation
@@ -84,6 +85,7 @@ fi
 # Script
 ###############################################################################
 export files_with_no_license_or_copyright=""
+export files_ok=""
 export files_checked=0
 
 function check_license() {
@@ -93,6 +95,8 @@ function check_license() {
         if  ! head -n 5 "${file}" | grep -q "SPDX-License-Identifier: ${license}" ||
             ! head -n 5 "${file}" | grep -q "${copyright}"; then
             files_with_no_license_or_copyright="${file}\n${files_with_no_license_or_copyright}"
+        else
+            files_ok="${file}\n${files_ok}"
         fi
         files_checked=$((files_checked + 1))
     done
@@ -109,6 +113,8 @@ if [ "${files_checked}" -eq 0 ]; then
 fi
 
 info "${MSG_CHECKED_FILES}" "${files_checked}"
+info "${MSG_OK_FILES}"
+printf "${files_ok}"
 if [ -n "${files_with_no_license_or_copyright}" ]; then
     error "${MSG_FAILING_FILES}"
     printf "${files_with_no_license_or_copyright}"

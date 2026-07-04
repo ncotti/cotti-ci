@@ -68,6 +68,7 @@ teardown_file() {
     run "${SCRIPT}" "${EXAMPLE_REPO_DIR}" "${LICENSE}" "${COPYRIGHT}" ".sh"
     assert_success
     assert_output --partial "[OK]"
+    assert_output --partial "script1.sh"
 }
 
 @test "License check fails for wrong license or copyright" {
