@@ -76,6 +76,7 @@ done
 
 if [ -z "${file_extensions}" ]; then
     error "${MSG_NO_FILE_EXTENSIONS}"
+    printf "${MSG_USAGE}\n"
     exit 1
 fi
 
