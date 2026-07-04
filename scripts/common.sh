@@ -25,7 +25,13 @@ function info() {
 
 ## Warning log
 function warning() {
-    printf "${BOLD_RED}[WARN] ${NC} "
+    printf "${BOLD_YELLOW}[WARN] ${NC} "
+    printf "$@"
+    printf "\n"
+}
+
+function ok() {
+    printf "${BOLD_GREEN}[OK]   ${NC} "
     printf "$@"
     printf "\n"
 }
