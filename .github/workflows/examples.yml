@@ -45,5 +45,5 @@ jobs:
         with:
           target_dir: ${{ env.REPO_PATH }}
           license: ${{ env.LICENSE }}
-          COPYRIGHT: ${{ env.COPYRIGHT }}
-          EXTENSION: ${{ env.EXTENSIONS }}
+          copyright: ${{ env.COPYRIGHT }}
+          file_extensions: ${{ env.EXTENSIONS }}
