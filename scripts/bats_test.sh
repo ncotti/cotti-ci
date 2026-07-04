@@ -65,7 +65,7 @@ if ! which bats; then
     bats_submodules="$(git submodule status | grep 'bats' | awk '{print $2}')"
     if [ -n "${bats_submodules}" ]; then
         #shellcheck disable=SC2086  # Allow word splitting for ${bats_submodules}
-        cd "${target_dir}" && git submodule update --init ${bats_submodules}
+        git submodule update --init ${bats_submodules}
 
         for submodule in ${bats_submodules}; do
             if [ -x "${submodule}/bin/bats" ]; then
