@@ -62,17 +62,14 @@ fi
 BATS=""
 if ! which bats; then
     info "Searching for bats submodule in your repo..."
-    bats_submodules="$(cd "${target_dir}" && git submodule status | grep 'bats' | awk '{print $2}')"
+    bats_submodules="$(git submodule status | grep 'bats' | awk '{print $2}')"
     if [ -n "${bats_submodules}" ]; then
         #shellcheck disable=SC2086  # Allow word splitting for ${bats_submodules}
         cd "${target_dir}" && git submodule update --init ${bats_submodules}
 
         for submodule in ${bats_submodules}; do
-            printf "%s\n" "${target_dir}/${submodule}/bin/bats"
-            ls "${submodule}"
-            ls "${submodule}/bin"
-            if [ -x "${target_dir}/${submodule}/bin/bats" ]; then
-                BATS="${target_dir}/${submodule}/bin/bats"
+            if [ -x "${submodule}/bin/bats" ]; then
+                BATS="${submodule}/bin/bats"
                 break
             fi
         done
