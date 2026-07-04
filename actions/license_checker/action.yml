@@ -44,7 +44,7 @@ runs:
       run: |
         chmod +x cotti-ci/scripts/license_check.sh
         cotti-ci/scripts/license_check.sh \
-          ${{ inputs.target_dir }} \
-          ${{ inputs.license }} \
-          ${{ inputs.copyright }} \
-          ${{ inputs.file_extensions }}
+          "${{ inputs.target_dir }}" \
+          "${{ inputs.license }}" \
+          "${{ inputs.copyright }}" \
+          "${{ inputs.file_extensions }}"
