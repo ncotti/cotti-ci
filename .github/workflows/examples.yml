@@ -11,7 +11,7 @@ jobs:
   example_markdown_linter:
     runs-on: ubuntu-latest
     env:
-      REPO_PATH: project_repo
+      REPO_PATH: .
     steps:
       - name: "Checkout project repo"
         uses: actions/checkout@v5
@@ -21,14 +21,14 @@ jobs:
       - name: "Call Markdown linter"
         # For usage in another repo:
         # ncotti/cotti-ci/actions/markdown_linter@vX
-        uses: ${{ env.REPO_PATH }}/actions/markdown_linter
+        uses: ./actions/markdown_linter
         with:
           target_dir: ${{ env.REPO_PATH }}
 
   example_license_check:
     runs-on: ubuntu-latest
     env:
-      REPO_PATH: project_repo
+      REPO_PATH: .
       LICENSE: "GPL-3.0-or-later"
       COPYRIGHT: "Copyright (C) 2026  Nicolas Gabriel Cotti"
       EXTENSIONS: .c .h .yml .sh .bats
@@ -41,7 +41,7 @@ jobs:
       - name: "Call license checker"
         # For usage in another repo:
         # ncotti/cotti-ci/actions/license_checker@vX
-        uses: ${{ env.REPO_PATH }}/actions/license_checker
+        uses: ./actions/license_checker
         with:
           target_dir: ${{ env.REPO_PATH }}
           license: ${{ env.LICENSE }}
