@@ -9,6 +9,8 @@ setup_file() {
     export SCRIPT="$BATS_TEST_DIRNAME/../scripts/markdown_lint.sh"
     export EXAMPLE_REPO_DIR="$BATS_TEST_DIRNAME/example_repo"
     export CONFIG_FILE="$BATS_TEST_DIRNAME/../default_config/.markdownlint-cli2.jsonc"
+
+    mkdir -p "$BATS_TEST_DIRNAME/tmp"
 }
 
 setup() {
@@ -22,7 +24,7 @@ teardown() {
 }
 
 teardown_file() {
-    true
+    rm -rf "$BATS_TEST_DIRNAME/tmp"
 }
 
 @test "target_dir is a required argument" {
@@ -70,10 +72,44 @@ teardown_file() {
 
 File should end with a newline (this does not).
 EOF
-)" >> "$BATS_TEST_TMPDIR/sample.md"
+)" > "$BATS_TEST_TMPDIR/sample.md"
     run "${SCRIPT}" "$BATS_TEST_TMPDIR"
     assert_failure
     assert_output --partial "sample.md"
     assert_output --partial "MD041"     # First level heading
     assert_output --partial "MD047"     # Trailing newline required
 }
+
+@test "If a file has a broken http URL, fail" {
+    # Lychee does not support using "$BATS_TEST_TMPDIR"
+    # Use normal /tmp instead
+    printf "%s" "$(cat<<EOF
+# File title
+
+The following [page](http://www.this_page_should_not_exist_by_any_means_and_is_only_a_test.com/) should not exist.
+EOF
+)" > "$BATS_TEST_DIRNAME/tmp/sample.md"
+    printf "\n" >> "$BATS_TEST_DIRNAME/tmp/sample.md"
+
+    run "${SCRIPT}" "$BATS_TEST_DIRNAME/tmp"
+    assert_failure
+    assert_output --partial "sample.md"
+    assert_output --partial "http://www.this_page_should_not_exist_by_any_means_and_is_only_a_test.com/"
+}
+
+@test "If a file has a broken internal file link, fail" {
+    printf "%s" "$(cat<<EOF
+# File title
+
+The following [file](/file/that/does/not/exist.c) should not exist.
+
+EOF
+)" > "$BATS_TEST_DIRNAME/tmp/sample.md"
+    printf "\n" >> "$BATS_TEST_DIRNAME/tmp/sample.md"
+
+    run "${SCRIPT}" "$BATS_TEST_DIRNAME/tmp"
+    assert_failure
+    assert_output --partial "sample.md"
+    assert_output --partial "/file/that/does/not/exist.c"
+}
+

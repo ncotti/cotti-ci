@@ -4,7 +4,7 @@ Reusable CI scripts for your own projects, to be used as [Github's composite act
 
 ## Features
 
-* Markdown linter with [markdownlint-cli2][markdown-cli2].
+* Markdown linter with [markdownlint-cli2][markdown-cli2] and broken links checker with [lychee][lychee].
 * Bash linter with [shellcheck][shellcheck].
 * Check for the presence of the license and copyright notice in source files.
 * Run [BATS][bats] (Bash Automated Testing System) tests.
@@ -57,6 +57,7 @@ You developed an exciting **new feature**, which extends the current functionali
 [markdown-cli2]: https://github.com/DavidAnson/markdownlint-cli2
 [shellcheck]: https://github.com/koalaman/shellcheck
 [bats]: https://bats-core.readthedocs.io/en/stable/
+[lychee]: https://github.com/lycheeverse/lychee
 
 [issue]: https://github.com/ncotti/cotti-ci/issues
 [pr]: https://github.com/ncotti/cotti-ci/pulls
