@@ -31,7 +31,7 @@ jobs:
       REPO_PATH: .
       LICENSE: "GPL-3.0-or-later"
       COPYRIGHT: "Copyright (C) 2026  Nicolas Gabriel Cotti"
-      EXTENSIONS: .c .h .yml .sh .bats
+      EXTENSIONS: ".c .h .yml .sh .bats"
     steps:
       - name: "Checkout project repo"
         uses: actions/checkout@v5
@@ -43,7 +43,7 @@ jobs:
         # ncotti/cotti-ci/actions/license_checker@vX
         uses: ./actions/license_checker
         with:
-          target_dir: ${{ env.REPO_PATH }}
-          license: ${{ env.LICENSE }}
-          copyright: ${{ env.COPYRIGHT }}
-          file_extensions: ${{ env.EXTENSIONS }}
+          target_dir: "${{ env.REPO_PATH }}"
+          license: "${{ env.LICENSE }}"
+          copyright: "${{ env.COPYRIGHT }}"
+          file_extensions: "${{ env.EXTENSIONS }}"
