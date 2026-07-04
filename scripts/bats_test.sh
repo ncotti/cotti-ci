@@ -61,14 +61,16 @@ fi
 # Try to find the submodules for bats
 BATS=""
 if ! which bats; then
+    info "Searching for bats submodule in your repo..."
     bats_submodules="$(cd "${target_dir}" && git submodule status | grep 'bats' | awk '{print $2}')"
     if [ -n "${bats_submodules}" ]; then
-        #shellcheck disable=SC2086
+        #shellcheck disable=SC2086  # Allow word splitting for ${bats_submodules}
         cd "${target_dir}" && git submodule update --init ${bats_submodules}
 
         for submodule in ${bats_submodules}; do
             if [ -x "${target_dir}/${submodule}/bin/bats" ]; then
                 BATS="${target_dir}/${submodule}/bin/bats"
+                break
             fi
         done
     fi
@@ -80,6 +82,8 @@ if [ -z "${BATS}" ]; then
     error "${MSG_INSTALL_FAIL}"
     exit 1
 fi
+
+info "Found BATS executable at: %s" "${BATS}"
 
 ###############################################################################
 # Script
