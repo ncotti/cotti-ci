@@ -81,7 +81,7 @@ jobs:
         with:
           path: ${{ env.REPO_PATH }}
 
-      - name: "Call bash tester"
+      - name: "Call BATS tester"
         # For usage in another repo:
         # ncotti/cotti-ci/actions/bats_tester@vX
         uses: ./actions/bats_tester
