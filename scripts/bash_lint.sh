@@ -60,5 +60,10 @@ fi
 info "${MSG_RUNNING}"
 find "${target_dir}" -type f \
     \( -name "*.sh" -o -name "*.bash" -o -name "*.bats" \) \
-    -exec shellcheck --format=tty --severity=style -x {} +
+    -exec shellcheck \
+        --format=tty \
+        --severity=style \
+        -x \
+        --source-path=SCRIPTDIR \
+        {} +
 ok "${MSG_OK}"

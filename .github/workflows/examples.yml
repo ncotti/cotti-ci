@@ -11,6 +11,7 @@ jobs:
   example_markdown_linter:
     runs-on: ubuntu-latest
     env:
+      # Modify to match your repo requirements
       REPO_PATH: .
     steps:
       - name: "Checkout project repo"
@@ -28,6 +29,7 @@ jobs:
   example_license_check:
     runs-on: ubuntu-latest
     env:
+      # Modify to match your repo requirements
       REPO_PATH: .
       LICENSE: "GPL-3.0-or-later"
       COPYRIGHT: "Copyright (C) 2026  Nicolas Gabriel Cotti"
@@ -47,3 +49,22 @@ jobs:
           license: "${{ env.LICENSE }}"
           copyright: "${{ env.COPYRIGHT }}"
           file_extensions: "${{ env.EXTENSIONS }}"
+
+  example_bash_lint:
+    runs-on: ubuntu-latest
+    env:
+      # Modify to match your repo requirements
+      REPO_PATH: .
+
+    steps:
+      - name: "Checkout project repo"
+        uses: actions/checkout@v5
+        with:
+          path: ${{ env.REPO_PATH }}
+
+      - name: "Call bash linter"
+        # For usage in another repo:
+        # ncotti/cotti-ci/actions/bash_linter@vX
+        uses: ./actions/bash_linter
+        with:
+          target_dir: "${{ env.REPO_PATH }}"
