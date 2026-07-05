@@ -60,6 +60,8 @@ fi
 ###############################################################################
 # Try to find the submodules for bats
 BATS=""
+
+cd "${target_dir}"
 if ! which bats; then
     info "Searching for bats submodule in your repo..."
     bats_submodules="$(git submodule status | grep 'bats' | awk '{print $2}')"
@@ -89,5 +91,6 @@ info "Found BATS executable at: %s" "${BATS}"
 # Script
 ###############################################################################
 info "${MSG_RUNNING}"
-"${BATS}" "${target_dir}"
+# Since we have already change directory to target dir, call BATS on current dir
+"${BATS}" "."
 ok "${MSG_OK}"
