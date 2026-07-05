@@ -9,8 +9,8 @@ Or even [this repo](https://github.com/ncotti/cotti-ci).
 Also, it points to some internal files, like [doc_a][doc_a] and [doc_b][doc_b], which should exist.
 
 <!--Internal links -->
-[doc_a]: /docs/doc_a.md
-[doc_b]: /docs/inner_docs/doc_b.md
+[doc_a]: docs/doc_a.md
+[doc_b]: docs/inner_docs/doc_b.md
 
 <!--External links -->
 [google]: http://www.google.com/
