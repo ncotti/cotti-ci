@@ -20,7 +20,7 @@ source "${SCRIPT_DIR}/common.sh"
 # Constants
 ###############################################################################
 LYCHEE_VERSION="v0.24.2"
-LYCHEE_TAR="https://github.com/lycheeverse/lychee/releases/download/lychee-${LYCHEE_VERSION}/lychee-aarch64-unknown-linux-gnu.tar.gz"
+LYCHEE_TAR="https://github.com/lycheeverse/lychee/releases/download/lychee-${LYCHEE_VERSION}/lychee-x86_64-unknown-linux-gnu.tar.gz"
 
 DEFAULT_CONFIG_FILE="${SCRIPT_DIR}/../default_config/.markdownlint-cli2.jsonc"
 
@@ -84,9 +84,10 @@ fi
 
 if ! command -v lychee &>/dev/null; then
     warning "Did not find lychee, installing..."
-    mkdir -p tmp
-    wget -qO- "${LYCHEE_TAR}" | tar --strip-components=1 -xz tmp
-    LYCHEE="tmp/lychee"
+    if [ ! -x "/tmp/lychee" ]; then
+        wget -qO- "${LYCHEE_TAR}" | tar --strip-components=1 -xz -C /tmp
+    fi
+    LYCHEE="/tmp/lychee"
 else
     LYCHEE="lychee"
 fi
