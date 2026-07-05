@@ -7,6 +7,8 @@
 ## Checks whether all markdown from a target directory follow the linting
 ## guidelines specified in the configuration file.
 ## https://github.com/DavidAnson/markdownlint-cli2
+## Also, it checks that all links are valid with lychee
+## https://github.com/lycheeverse/lychee
 
 set -e
 SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
@@ -17,6 +19,9 @@ source "${SCRIPT_DIR}/common.sh"
 ###############################################################################
 # Constants
 ###############################################################################
+LYCHEE_VERSION="v0.24.2"
+LYCHEE_TAR="https://github.com/lycheeverse/lychee/releases/download/lychee-${LYCHEE_VERSION}/lychee-x86_64-unknown-linux-gnu.tar.gz"
+
 DEFAULT_CONFIG_FILE="${SCRIPT_DIR}/../default_config/.markdownlint-cli2.jsonc"
 
 MSG_NO_TARGET_DIR="No target directory argument."
@@ -77,9 +82,21 @@ if ! command -v markdownlint-cli2 &>/dev/null; then
     sudo npm install markdownlint-cli2 --global
 fi
 
+if ! command -v lychee &>/dev/null; then
+    warning "Did not find lychee, installing..."
+    if [ ! -x "/tmp/lychee" ]; then
+        wget -qO- "${LYCHEE_TAR}" | tar --strip-components=1 -xz -C /tmp
+    fi
+    LYCHEE="/tmp/lychee"
+else
+    LYCHEE="lychee"
+fi
+
 ###############################################################################
 # Script
 ###############################################################################
 info "${MSG_RUNNING}"
 (cd "${target_dir}" && markdownlint-cli2 --config "${config_file}")
+info "Running lychee..."
+(cd "${target_dir}" && "${LYCHEE}" --no-progress --root-dir "." -- ".")
 ok "${MSG_OK}"
