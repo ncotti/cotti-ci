@@ -1,8 +1,6 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 # Copyright (C) 2026  Nicolas Gabriel Cotti
 
-
-
 name: "Examples"
 description: <
   Calls all example workflows present in this repository.
@@ -22,7 +20,7 @@ jobs:
 
       - name: "Call Markdown linter"
         # For usage in another repo:
-        # ncotti/cotti-ci/actions/markdown_linter@vX
+        # ncotti/cotti-ci/actions/markdown_linter@main
         uses: ./actions/markdown_linter
         with:
           target_dir: ${{ env.REPO_PATH }}
@@ -43,7 +41,7 @@ jobs:
 
       - name: "Call license checker"
         # For usage in another repo:
-        # ncotti/cotti-ci/actions/license_checker@vX
+        # ncotti/cotti-ci/actions/license_checker@main
         uses: ./actions/license_checker
         with:
           target_dir: "${{ env.REPO_PATH }}"
@@ -65,7 +63,7 @@ jobs:
 
       - name: "Call bash linter"
         # For usage in another repo:
-        # ncotti/cotti-ci/actions/bash_linter@vX
+        # ncotti/cotti-ci/actions/bash_linter@main
         uses: ./actions/bash_linter
         with:
           target_dir: "${{ env.REPO_PATH }}"
@@ -84,7 +82,7 @@ jobs:
 
       - name: "Call BATS tester"
         # For usage in another repo:
-        # ncotti/cotti-ci/actions/bats_tester@vX
+        # ncotti/cotti-ci/actions/bats_tester@main
         uses: ./actions/bats_tester
         with:
           target_dir: "${{ env.REPO_PATH }}/${{ env.TEST_PATH }}"
