@@ -84,9 +84,9 @@ fi
 
 if ! command -v lychee &>/dev/null; then
     warning "Did not find lychee, installing..."
-    wget "${LYCHEE_TAR}" "/tmp/lychee.tar.gz"
-    wget -qO- "${LYCHEE_TAR}" | tar --strip-components=1 -xz "/tmp"
-    LYCHEE="/tmp/lychee"
+    mkdir -p tmp
+    wget -qO- "${LYCHEE_TAR}" | tar --strip-components=1 -xz tmp
+    LYCHEE="tmp/lychee"
 else
     LYCHEE="lychee"
 fi
