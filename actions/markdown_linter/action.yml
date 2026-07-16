@@ -22,10 +22,12 @@ runs:
       uses: actions/checkout@v5
       with:
         repository: ncotti/cotti-ci
-        path: cotti-ci
+        path: "${{ runner.temp }}/cotti-ci"
 
     - name: "Markdown linter script"
       shell: bash
       run: |
-        chmod +x cotti-ci/scripts/markdown_lint.sh
-        cotti-ci/scripts/markdown_lint.sh ${{ inputs.target_dir}} ${{ inputs.config_file }}
+        chmod +x "${{ runner.temp }}/cotti-ci/scripts/markdown_lint.sh"
+        "${{ runner.temp }}/cotti-ci/scripts/markdown_lint.sh" \
+          "${{ inputs.target_dir }}" \
+          "${{ inputs.config_file }}"
