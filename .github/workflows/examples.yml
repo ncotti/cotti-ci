@@ -12,6 +12,7 @@ jobs:
     env:
       # Modify to match your repo requirements
       REPO_PATH: .
+      CONFIG_FILE: ""
     steps:
       - name: "Checkout project repo"
         uses: actions/checkout@v5
@@ -24,6 +25,7 @@ jobs:
         uses: ./actions/markdown_linter
         with:
           target_dir: ${{ env.REPO_PATH }}
+          config_file: ${{ env.CONFIG_FILE }}
 
   example_license_check:
     runs-on: ubuntu-latest
