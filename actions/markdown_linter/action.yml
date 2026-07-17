@@ -11,21 +11,25 @@ inputs:
     type: string
   config_file:
     description: ".markdownlint-cli2.jsonc file path inside your repo"
-    default: "cotti-ci/default_config/.markdownlint-cli2.jsonc"
+    default: ""
     required: false
     type: string
 
 runs:
   using: "composite"
   steps:
-    - name: "Checkout cotti-ci"
-      uses: actions/checkout@v5
-      with:
-        repository: ncotti/cotti-ci
-        path: cotti-ci
-
     - name: "Markdown linter script"
       shell: bash
       run: |
-        chmod +x cotti-ci/scripts/markdown_lint.sh
-        cotti-ci/scripts/markdown_lint.sh ${{ inputs.target_dir}} ${{ inputs.config_file }}
+        # If config_file is empty, use the default one from the repo
+        # Expanding here to have access to github.action_path
+        if [ -z "${{ inputs.config_file }}" ]; then
+          CONFIG_FILE="${{ github.action_path }}/../../default_config/.markdownlint-cli2.jsonc"
+        else
+          CONFIG_FILE="${{ inputs.config_file }}"
+        fi
+
+        chmod +x "${{ github.action_path }}/../../scripts/markdown_lint.sh"
+        "${{ github.action_path }}/../../scripts/markdown_lint.sh" \
+          "${{ inputs.target_dir }}" \
+          "${CONFIG_FILE}"

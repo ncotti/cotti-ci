@@ -15,15 +15,9 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: "Checkout cotti-ci"
-      uses: actions/checkout@v5
-      with:
-        repository: ncotti/cotti-ci
-        path: cotti-ci
-
     - name: "Run shellcheck"
       shell: bash
       run: |
-        chmod +x cotti-ci/scripts/bash_lint.sh
-        cotti-ci/scripts/bash_lint.sh \
+        chmod +x "${{ github.action_path }}/../../scripts/bash_lint.sh"
+        ${{ github.action_path }}/../../scripts/bash_lint.sh \
           "${{ inputs.target_dir }}"
