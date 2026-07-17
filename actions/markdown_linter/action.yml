@@ -24,7 +24,7 @@ runs:
         # If config_file is empty, use the default one from the repo
         # Expanding here to have access to github.action_path
         if [ -z "${{ inputs.config_file }}" ]; then
-          CONFIG_FILE="${{ github.action_path }}/../../default_config/.markdownlint-cli2.jsonc
+          CONFIG_FILE="${{ github.action_path }}/../../default_config/.markdownlint-cli2.jsonc"
         else
           CONFIG_FILE="${{ inputs.config_file }}"
         fi
