@@ -21,6 +21,8 @@ runs:
     - name: "Markdown linter script"
       shell: bash
       run: |
+        printf "${{ github.action_path }}\n"
+        ls "${{ github.action_path }}"
         chmod +x "${{ github.action_path }}/scripts/markdown_lint.sh"
         "${{ github.action_path }}/scripts/markdown_lint.sh" \
           "${{ inputs.target_dir }}" \
