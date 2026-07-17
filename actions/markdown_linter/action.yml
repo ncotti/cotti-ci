@@ -11,23 +11,17 @@ inputs:
     type: string
   config_file:
     description: ".markdownlint-cli2.jsonc file path inside your repo"
-    default: "cotti-ci/default_config/.markdownlint-cli2.jsonc"
+    default: "${{ github.action_path }}/default_config/.markdownlint-cli2.jsonc"
     required: false
     type: string
 
 runs:
   using: "composite"
   steps:
-    - name: "Checkout cotti-ci"
-      uses: actions/checkout@v5
-      with:
-        repository: ncotti/cotti-ci
-        path: "${{ runner.temp }}/cotti-ci"
-
     - name: "Markdown linter script"
       shell: bash
       run: |
-        chmod +x "${{ runner.temp }}/cotti-ci/scripts/markdown_lint.sh"
-        "${{ runner.temp }}/cotti-ci/scripts/markdown_lint.sh" \
+        chmod +x "${{ github.action_path }}/scripts/markdown_lint.sh"
+        "${{ github.action_path }}/scripts/markdown_lint.sh" \
           "${{ inputs.target_dir }}" \
           "${{ inputs.config_file }}"

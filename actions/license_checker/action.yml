@@ -33,17 +33,11 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: "Checkout cotti-ci"
-      uses: actions/checkout@v5
-      with:
-        repository: ncotti/cotti-ci
-        path: "${{ runner.temp }}/cotti-ci"
-
     - name: "License checker script"
       shell: bash
       run: |
-        chmod +x "${{ runner.temp }}/cotti-ci/scripts/license_check.sh"
-        "${{ runner.temp }}/cotti-ci/scripts/license_check.sh" \
+        chmod +x "${{ github.action_path }}/scripts/license_check.sh"
+        "${{ github.action_path }}/scripts/license_check.sh" \
           "${{ inputs.target_dir }}" \
           "${{ inputs.license }}" \
           "${{ inputs.copyright }}" \

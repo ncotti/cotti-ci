@@ -14,15 +14,9 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: "Checkout cotti-ci"
-      uses: actions/checkout@v5
-      with:
-        repository: ncotti/cotti-ci
-        path: "${{ runner.temp }}/cotti-ci"
-
     - name: "Run bats tests"
       shell: bash
       run: |
-        chmod +x "${{ runner.temp }}/cotti-ci/scripts/bats_test.sh"
-        "${{ runner.temp }}/cotti-ci/scripts/bats_test.sh" \
+        chmod +x "${{ github.action_path }}/scripts/bats_test.sh"
+        "${{ github.action_path }}/scripts/bats_test.sh" \
           "${{ inputs.target_dir }}"
