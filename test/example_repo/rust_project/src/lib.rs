@@ -1,6 +1,5 @@
-
 // Does the operation a + b
-pub fn add_two_numbers(a:i32, b:i32) -> i32 {
+pub fn add_two_numbers(a: i32, b: i32) -> i32 {
     a + b
 }
 
@@ -13,4 +12,3 @@ mod tests {
         assert_eq!(add_two_numbers(5, 7), 5 + 7);
     }
 }
-
