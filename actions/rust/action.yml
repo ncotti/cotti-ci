@@ -18,7 +18,7 @@ runs:
   steps:
     - name: "Format"
       shell: bash
-      run: cargo fmt --check --manifest-path "${{ inputs.target_dir }}/Cargo.toml"
+      run: cargo fmt --check --all --manifest-path "${{ inputs.target_dir }}/Cargo.toml"
 
     - name: "Compile"
       shell: bash
@@ -26,7 +26,7 @@ runs:
 
     - name: "Test"
       shell: bash
-      run: cargo test --manifest-path "${{ inputs.target_dir }}/Cargo.toml"
+      run: cargo test --all --manifest-path "${{ inputs.target_dir }}/Cargo.toml"
 
     - name: "Build documentation"
       shell: bash
