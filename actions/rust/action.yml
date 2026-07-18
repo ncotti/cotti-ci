@@ -18,16 +18,16 @@ runs:
   steps:
     - name: "Format"
       shell: bash
-      run: cargo fmt --check --manifest-path "${{ inputs.target_dir }}"
+      run: cargo fmt --check --manifest-path "${{ inputs.target_dir }}/Cargo.toml"
 
     - name: "Compile"
       shell: bash
-      run: RUSTFLAGS="-D warnings" cargo build --manifest-path "${{ inputs.target_dir }}"
+      run: RUSTFLAGS="-D warnings" cargo build --manifest-path "${{ inputs.target_dir }}/Cargo.toml"
 
     - name: "Test"
       shell: bash
-      run: cargo test --manifest-path "${{ inputs.target_dir }}""
+      run: cargo test --manifest-path "${{ inputs.target_dir }}/Cargo.toml""
 
     - name: "Build documentation"
       shell: bash
-      run: RUSTDOCFLAGS="-D warnings" cargo doc --no-deps --manifest-path "${{ inputs.target_dir }}"
+      run: RUSTDOCFLAGS="-D warnings" cargo doc --no-deps --manifest-path "${{ inputs.target_dir }}/Cargo.toml"
