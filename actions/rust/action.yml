@@ -30,4 +30,4 @@ runs:
 
     - name: "Build documentation"
       shell: bash
-      run: RUSTDOCFLAGS="-D warnings" cargo doc --no-deps --manifest-path "${{ inputs.target_dir }}/Cargo.toml"
+      run: RUSTDOCFLAGS="-D warnings -D missing_docs" cargo doc --no-deps --manifest-path "${{ inputs.target_dir }}/Cargo.toml"
