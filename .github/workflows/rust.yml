@@ -13,7 +13,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       # Modify to match your repo requirements
-      REPO_PATH: ./test/example_repo/rust_project
+      REPO_PATH: .
+      RUST_PATH: ./test/example_repo/rust_project
     steps:
       - name: "Checkout project repo"
         uses: actions/checkout@v5
@@ -25,4 +26,4 @@ jobs:
         # ncotti/cotti-ci/actions/rust@main
         uses: ./actions/rust
         with:
-          target_dir: ${{ env.REPO_PATH }}
+          target_dir: ${{ env.RUST_PATH }}
