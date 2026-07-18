@@ -1,0 +1,33 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
+# Copyright (C) 2026  Nicolas Gabriel Cotti
+
+name: Rust compiler, tester and documenter
+description: >
+  Runs "cargo build", "cargo test" and "cargo doc", ensuring that the
+  project compiles, all tests pass and there are no warnings in the generated
+  documentation.
+
+inputs:
+  target_dir:
+    description: "Root directory where the cargo.toml file can be found"
+    required: true
+    type: string
+
+runs:
+  using: "composite"
+  steps:
+    - name: "Format"
+      shell: bash
+      run: cargo fmt --check --manifest-path "${{ inputs.target_dir }}/Cargo.toml"
+
+    - name: "Compile"
+      shell: bash
+      run: RUSTFLAGS="-D warnings" cargo build --manifest-path "${{ inputs.target_dir }}/Cargo.toml"
+
+    - name: "Test"
+      shell: bash
+      run: cargo test --manifest-path "${{ inputs.target_dir }}/Cargo.toml"
+
+    - name: "Build documentation"
+      shell: bash
+      run: RUSTDOCFLAGS="-D warnings -D missing_docs" cargo doc --no-deps --manifest-path "${{ inputs.target_dir }}/Cargo.toml"

@@ -11,7 +11,7 @@ Reusable CI scripts for your own projects, to be used as [Github's composite act
 
 ## Usage
 
-All CI scripts are defined as [Github's composite actions][composite_action], and an example of their execution is provided in the [examples.yml][example_ci_execution] file.
+All CI scripts are defined as [Github's composite actions][composite_action]. An example of their execution is provided in the [.github/worflows][example_ci_execution] folder. You may copy-paste those examples to use the CI workflows in your projects.
 
 To use one of them in your CI workflow, you would normally do the following:
 
@@ -49,7 +49,7 @@ jobs:
 You developed an exciting **new feature**, which extends the current functionality, and you would like to be include it in the repo? No problem, open a [Pull Request][pr] and I will review it.
 
 <!-- Internal links -->
-[example_ci_execution]: /.github/workflows/examples.yml
+[example_ci_execution]: /.github/workflows/
 
 <!-- External links -->
 [composite_action]: https://docs.github.com/en/actions/tutorials/create-actions/create-a-composite-action
