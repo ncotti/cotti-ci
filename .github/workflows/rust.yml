@@ -9,11 +9,11 @@ description: <
 on: push
 
 jobs:
-  markdown_linter:
+  Rust_compiler:
     runs-on: ubuntu-latest
     env:
       # Modify to match your repo requirements
-      REPO_PATH: .
+      REPO_PATH: ./test/example_repo/rust_project
     steps:
       - name: "Checkout project repo"
         uses: actions/checkout@v5
