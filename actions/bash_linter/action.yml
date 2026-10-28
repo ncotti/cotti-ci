@@ -17,7 +17,9 @@ runs:
   steps:
     - name: "Run shellcheck"
       shell: bash
+      env:
+        ACTION_PATH: ${{ github.action_path }}
       run: |
-        chmod +x "${{ github.action_path }}/../../scripts/bash_lint.sh"
-        ${{ github.action_path }}/../../scripts/bash_lint.sh \
+        chmod +x "${ACTION_PATH}/../../scripts/bash_lint.sh"
+        ${ACTION_PATH}/../../scripts/bash_lint.sh \
           "${{ inputs.target_dir }}"
