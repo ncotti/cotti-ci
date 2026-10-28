@@ -35,9 +35,11 @@ runs:
   steps:
     - name: "License checker script"
       shell: bash
+      env:
+        ACTION_PATH: ${{ github.action_path }}
       run: |
-        chmod +x "${{ github.action_path }}/../../scripts/license_check.sh"
-        "${{ github.action_path }}/../../scripts/license_check.sh" \
+        chmod +x "${ACTION_PATH}/../../scripts/license_check.sh"
+        "${ACTION_PATH}/../../scripts/license_check.sh" \
           "${{ inputs.target_dir }}" \
           "${{ inputs.license }}" \
           "${{ inputs.copyright }}" \

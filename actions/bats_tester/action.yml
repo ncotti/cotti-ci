@@ -16,7 +16,9 @@ runs:
   steps:
     - name: "Run bats tests"
       shell: bash
+      env:
+        ACTION_PATH: ${{ github.action_path }}
       run: |
-        chmod +x "${{ github.action_path }}/../../scripts/bats_test.sh"
-        "${{ github.action_path }}/../../scripts/bats_test.sh" \
+        chmod +x "${ACTION_PATH}/../../scripts/bats_test.sh"
+        "${ACTION_PATH}/../../scripts/bats_test.sh" \
           "${{ inputs.target_dir }}"
